@@ -10,7 +10,7 @@ import UIKit
 
 public class TwitterCounterController: UIViewController {
     public init(){
-        super.init()
+        super.init(nibName: "TwitterCounterController", bundle: Bundle.module)
     }
 
 }
