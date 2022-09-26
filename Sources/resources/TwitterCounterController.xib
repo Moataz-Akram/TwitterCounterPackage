@@ -25,10 +25,20 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6r-5W-F5H">
+                    <rect key="frame" x="143" y="354" width="128" height="31"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="test reachability"/>
+                    <connections>
+                        <action selector="testReachability:" destination="-1" eventType="touchUpInside" id="8KH-bN-40W"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="d6r-5W-F5H" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="HoF-T8-s4J"/>
+                <constraint firstItem="XWJ-U9-h0h" firstAttribute="top" secondItem="d6r-5W-F5H" secondAttribute="bottom" constant="52.5" id="N8A-XN-dPc"/>
                 <constraint firstItem="XWJ-U9-h0h" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="hSm-Ay-8Qi"/>
                 <constraint firstItem="XWJ-U9-h0h" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="sMx-tP-kyn"/>
             </constraints>
