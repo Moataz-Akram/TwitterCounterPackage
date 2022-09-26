@@ -25,21 +25,21 @@ public class TwitterCounterController: UIViewController {
     }
     
     func setupReachability() {
-        reachability.whenReachable = { reachability in
+        reachability?.whenReachable = { reachability in
             if reachability.connection == .wifi {
                 print("Reachable via WiFi")
             } else {
                 print("Reachable via Cellular")
             }
         }
-        reachability.whenUnreachable = { _ in
+        reachability?.whenUnreachable = { _ in
             print("Not reachable")
         }
     }
     
     @IBAction func testReachability(_ sender: Any) {
         do {
-            try reachability.startNotifier()
+            try reachability?.startNotifier()
         } catch {
             print("Unable to start notifier")
         }
