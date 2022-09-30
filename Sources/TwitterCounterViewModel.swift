@@ -8,7 +8,6 @@
 import Foundation
 import TwitterAPIKit
 import AuthenticationServices
-import RxSwift
 
 class TwitterCounterViewModel {
     var client: TwitterAPIClient?

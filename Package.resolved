@@ -9,6 +9,15 @@
           "revision": "c01bbdf2d633cf049ae1ed1a68a2020a8bda32e2",
           "version": "5.1.0"
         }
+      },
+      {
+        "package": "TwitterAPIKit",
+        "repositoryURL": "https://github.com/mironal/TwitterAPIKit",
+        "state": {
+          "branch": null,
+          "revision": "4c6810d7c0351f9810da1563103303fec82c0e86",
+          "version": "0.2.2"
+        }
       }
     ]
   },
