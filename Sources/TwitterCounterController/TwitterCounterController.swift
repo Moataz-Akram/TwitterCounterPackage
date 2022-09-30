@@ -47,4 +47,17 @@ public class TwitterCounterController: UIViewController {
         reachability.connection
 
     }
+    
+    @IBAction func navigateInsidePackage(_ sender: Any) {
+        print("navigate inside package did press")
+        let twitterController = TwitterCounterViewController()
+        let navController = UINavigationController(rootViewController: twitterController)
+        DispatchQueue.main.async {
+            self.present(navController, animated: true) {
+                print("completion")
+            }
+        }
+
+    }
+    
 }

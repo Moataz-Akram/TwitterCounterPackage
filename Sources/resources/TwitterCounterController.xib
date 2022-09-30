@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -26,11 +26,19 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6r-5W-F5H">
-                    <rect key="frame" x="143" y="354" width="128" height="31"/>
+                    <rect key="frame" x="134.5" y="350.5" width="145" height="34.5"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="test reachability"/>
                     <connections>
                         <action selector="testReachability:" destination="-1" eventType="touchUpInside" id="8KH-bN-40W"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oU5-sg-3LT">
+                    <rect key="frame" x="103.5" y="265.5" width="207" height="35"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="navigate inside package"/>
+                    <connections>
+                        <action selector="navigateInsidePackage:" destination="-1" eventType="touchUpInside" id="6rG-gc-Vmq"/>
                     </connections>
                 </button>
             </subviews>
@@ -38,9 +46,11 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="d6r-5W-F5H" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="HoF-T8-s4J"/>
+                <constraint firstItem="oU5-sg-3LT" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="IZj-4k-5wk"/>
                 <constraint firstItem="XWJ-U9-h0h" firstAttribute="top" secondItem="d6r-5W-F5H" secondAttribute="bottom" constant="52.5" id="N8A-XN-dPc"/>
                 <constraint firstItem="XWJ-U9-h0h" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="hSm-Ay-8Qi"/>
                 <constraint firstItem="XWJ-U9-h0h" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="sMx-tP-kyn"/>
+                <constraint firstItem="d6r-5W-F5H" firstAttribute="top" secondItem="oU5-sg-3LT" secondAttribute="bottom" constant="50" id="yWJ-1X-COP"/>
             </constraints>
             <point key="canvasLocation" x="139" y="135"/>
         </view>
