@@ -57,29 +57,31 @@ public class TwitterCounterViewController: UIViewController {
     }
     
     func setupUI() {
-        typedCount.text = "0/280"
-        remainingCount.text = "280"
+        textField.layer.cornerRadius = 10
         textField.delegate = self
         textField.text = placeHolderText
         textField.textColor = .placeholderText
         textField.addingShadow()
 
+        typedCount.text = "0/280"
+        remainingCount.text = "280"
         countTypedTitle.backgroundColor = .systemTeal
         countRemainingTitle.backgroundColor = .systemTeal
         countTypedTitle.roundUpperCorners(cornerRadius: 10)
         countRemainingTitle.roundUpperCorners(cornerRadius: 10)
-
-        copyTextButton.layer.cornerRadius = 10
-        clearTextButton.layer.cornerRadius = 10
-        postTweetButton.layer.cornerRadius = 10
-        textField.layer.cornerRadius = 10
-
         characterCountsStack.subviews.forEach{ view in
             view.layer.cornerRadius = 10
             view.layer.borderWidth = 1
             view.layer.borderColor = UIColor.systemTeal.cgColor
         }
-        
+
+        copyTextButton.layer.cornerRadius = 10
+        clearTextButton.layer.cornerRadius = 10
+        postTweetButton.layer.cornerRadius = 10
+        copyTextButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
+        clearTextButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
+        postTweetButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+
     }
 
     @IBAction func copyTextDidPress(_ sender: Any) {
