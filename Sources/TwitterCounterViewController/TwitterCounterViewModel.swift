@@ -86,17 +86,13 @@ class TwitterCounterViewModel {
     }
     
     func postTweet(tweet: String) {
-        if client == nil {
+        guard let client = client else {
             alretMessage.onNext((title: "error", message: "there's no authentication with the server"))
             return
         }
         if checkInternetConnection() {
-            DispatchQueue.global(qos: .background).async { [weak self] in
+            DispatchQueue.global(qos: .background).async { [weak self, client] in
                 guard let self = self else { return }
-                guard let client = self.client else {
-                    self.alretMessage.onNext((title: "error", message: "error in internet connection"))
-                    return
-                }
 
                 let getTweetsRequest = GetTweetsRequestV2(ids: ["1575687922229051393"])
                 let postTweet = PostTweetsRequestV2(text: tweet)
@@ -104,12 +100,6 @@ class TwitterCounterViewModel {
                 response.responseObject { response in
                     switch response.result {
                     case .success(_):
-                        if let error = response.error {
-                            // this check is when the request itself is successful but it didn't do what it should, for example getting a tweet while giving a wrong tweet -> the request will be successful but it won't find a tweet with the wrong id.
-                            self.alretMessage.onNext((title: "error", message: error.localizedDescription))
-                            return
-                        }
-                        
                         print("response: \(response.prettyString)")
                         self.alretMessage.onNext((title: "success", message: "tweeted successfully!"))
                     case .failure(_):
