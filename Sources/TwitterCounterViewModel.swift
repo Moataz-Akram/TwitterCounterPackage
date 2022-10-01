@@ -16,14 +16,11 @@ class TwitterCounterViewModel {
     var token: TwitterAuthenticationMethod.OAuth20?
     var alretMessage = PublishSubject<(title: String, message: String)>()
 
-    let consumerKey = "EOhRvxTAJkaWUE3tqWH3QvBrF"
-    let consumerSecret = "Kg7KiHts2kigiWDiBlAD4pXf0RueT54dG3O5JInlUHGoTfSwv4"
-    var oauthToken = "1211128639263141888-CcxBOEgohfw29jFixBh3WqvJ7I26Td"
-    var oauthTokenSecret = "F3l8vXL0Lo5wL28KwJkhiHKvW2RzeGwNOlJTRQgpHsf6W"
-    
-    let clientId = "MFNNRy1YOWtoQkdVTTNBOFUtY0g6MTpjaQ"
-    let clientSecert = "gu4mHHhUUjOIqqhgXO8mYmLWuReqyuFR8Z5f3os8W8sKSiWx5M"
-    
+    let consumerKey = "ZLauxf6o574LAdVkESupoCxc5"
+    let consumerSecret = "hOKZdijHlJXXtCjanFKuXy6yrqwq2n2SAFJ2hq5rPibZ6YoV4w"
+    let oauthToken = "1211128639263141888-fxov9NblIFPNbmDpEXf5mZeNguZ3af"
+    let oauthTokenSecret = "xhpVASUZcgHllRu0C3JCdQUgdB91KzNOPXHJxWT5LD2ZT"
+
     /**
      It's the app's URL added in the project Target in info section.
      Should be same as the project URL added in Twitter developer portal when getting auth keys & tokens.
