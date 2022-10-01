@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import AuthenticationServices
 
 extension UIViewController {
     /// Adds *UITapGestureRecognizer* to current UIViewController's view to dismiss presented keyboard.
@@ -31,11 +30,5 @@ extension UIViewController {
             block?()
         })
         present(alert, animated: true)
-    }
-}
-
-extension TwitterCounterViewController: ASWebAuthenticationPresentationContextProviding {
-    public func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
-        return view.window!
     }
 }

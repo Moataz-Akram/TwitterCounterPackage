@@ -128,3 +128,9 @@ extension TwitterCounterViewController: UITextViewDelegate {
         } else { return }
     }
 }
+
+extension TwitterCounterViewController: ASWebAuthenticationPresentationContextProviding {
+    public func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+        return view.window!
+    }
+}
