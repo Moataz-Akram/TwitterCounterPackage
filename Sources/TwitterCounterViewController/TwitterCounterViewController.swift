@@ -41,11 +41,8 @@ public class TwitterCounterViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         setupViewModel()
-        addKeyboardDismissHandler()
-    }
-    
-    public override func viewWillAppear(_ animated: Bool) {
         setupUI()
+        addKeyboardDismissHandler()
     }
     
     func setupViewModel() {
