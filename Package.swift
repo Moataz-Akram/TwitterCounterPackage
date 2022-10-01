@@ -19,15 +19,15 @@ let package = Package(
         // .package(url: /* package url */, from: "1.0.0"),
         .package(name: "Reachability", url: "https://github.com/ashleymills/Reachability.swift", .upToNextMajor(from: "5.1.0")),
         .package(name: "TwitterAPIKit", url: "https://github.com/mironal/TwitterAPIKit", .upToNextMajor(from: "0.2.2")),
-        
-//        .package(name: "TwitterAPIKit", path: "https://github.com/mironal/TwitterAPIKit", .upToNextMajor(from: "0.2.2"))
+          .package(url: "https://github.com/ReactiveX/RxSwift.git", .exact("6.5.0")),
+
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "TwitterCounterPackage",
-            dependencies: ["Reachability", "TwitterAPIKit"],
+            dependencies: ["Reachability", "TwitterAPIKit", "RxSwift"],
             path: "Sources"),
         .testTarget(
             name: "TwitterCounterPackageTests",

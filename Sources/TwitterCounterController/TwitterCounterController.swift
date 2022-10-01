@@ -50,7 +50,7 @@ public class TwitterCounterController: UIViewController {
     
     @IBAction func navigateInsidePackage(_ sender: Any) {
         print("navigate inside package did press")
-        let twitterController = TwitterCounterViewController()
+        let twitterController = TwitterCounterViewController(appURL: "TwitterCounterDemo://")
         let navController = UINavigationController(rootViewController: twitterController)
         DispatchQueue.main.async {
             self.present(navController, animated: true) {

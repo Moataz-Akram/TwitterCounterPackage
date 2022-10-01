@@ -6,13 +6,16 @@
 //
 
 import Foundation
+import RxSwift
+import Reachability
 import TwitterAPIKit
 import AuthenticationServices
 
 class TwitterCounterViewModel {
     var client: TwitterAPIClient?
     var token: TwitterAuthenticationMethod.OAuth20?
-    
+    var alretMessage = PublishSubject<(title: String, message: String)>()
+
     let consumerKey = "EOhRvxTAJkaWUE3tqWH3QvBrF"
     let consumerSecret = "Kg7KiHts2kigiWDiBlAD4pXf0RueT54dG3O5JInlUHGoTfSwv4"
     var oauthToken = "1211128639263141888-CcxBOEgohfw29jFixBh3WqvJ7I26Td"
@@ -21,56 +24,55 @@ class TwitterCounterViewModel {
     let clientId = "MFNNRy1YOWtoQkdVTTNBOFUtY0g6MTpjaQ"
     let clientSecert = "gu4mHHhUUjOIqqhgXO8mYmLWuReqyuFR8Z5f3os8W8sKSiWx5M"
     
-    var controller: TwitterCounterViewController!
+    /**
+     It's the app's URL added in the project Target in info section.
+     Should be same as the project URL added in Twitter developer portal when getting auth keys & tokens.
+     */
+    let oauthCallback: String
     
-    // move to view model.
-    func auth1(sessionProvider: ASWebAuthenticationPresentationContextProviding) {
+    init(oauthCallback: String) {
+        self.oauthCallback = oauthCallback
         client = TwitterAPIClient(
                     consumerKey: consumerKey,
                     consumerSecret: consumerSecret,
                     oauthToken: oauthToken,
                     oauthTokenSecret: oauthTokenSecret
                 )
+    }
+    
+    func authenticateTwitter(sessionProvider: ASWebAuthenticationPresentationContextProviding) {
         
-        guard let client else { return }
-        client.auth.oauth10a.postOAuthRequestToken(.init(oauthCallback: "TwitterCounterDemo://"))
+        client?.auth.oauth10a.postOAuthRequestToken(.init(oauthCallback: oauthCallback))
             .responseObject { [weak self] response in
                 guard let self = self else { return }
                 do {
                     let success = try response.result.get()
-                    let url = self.client?.auth.oauth10a.makeOAuthAuthorizeURL(.init(oauthToken: success.oauthToken))!
-
-                    let session = ASWebAuthenticationSession(url: url!, callbackURLScheme: "twitter-api-kit-ios-sample") { url, error in
-
-                        // url is "twitter-api-kit-ios-sample://?oauth_token=<string>&oauth_verifier=<string>"
-                        guard let url = url else {
+                    let url = self.client?.auth.oauth10a.makeOAuthAuthorizeURL(.init(oauthToken: success.oauthToken))
+                    guard let url = url else { return }
+                    let session = ASWebAuthenticationSession(url: url, callbackURLScheme: "twitter-api-kit-ios-sample") { [weak self] url, error in
+                        guard let self = self else { return }
                             if let error = error {
-                                self.controller.showAlert(title: "Error", message: error.localizedDescription)
+                                self.client = nil
+                                self.alretMessage.onNext((title: "Error", message: error.localizedDescription))
+                                return
                             }
-                            return
-                        }
-                        
+                        guard let url = url else { return }
+
                         let component = URLComponents(url: url, resolvingAgainstBaseURL: false)
                         guard let oauthToken = component?.queryItems?.first(where: { $0.name == "oauth_token"} )?.value,
                               let oauthVerifier = component?.queryItems?.first(where: { $0.name == "oauth_verifier"})?.value else {
-                            print("Invalid URL")
+                            self.client = nil
+                            self.alretMessage.onNext((title: "Error", message: "Invalid URL"))
                             return
                         }
                         self.client?.auth.oauth10a.postOAuthAccessToken(.init(oauthToken: oauthToken, oauthVerifier: oauthVerifier))
                             .responseObject { response in
-                                do {
-                                    let token = try response.result.get()
-                                    let oauthToken = token.oauthToken
-                                    let oauthTokenSecret = token.oauthTokenSecret
-
-                                    self.oauthToken = oauthToken
-                                    self.oauthTokenSecret = oauthTokenSecret
-
-                                    self.controller.showAlert(title: "Success!", message: nil) {
-                                        self.controller.navigationController?.popViewController(animated: true)
-                                    }
-                                } catch {
-                                    self.controller.showAlert(title: "Error", message: error.localizedDescription)
+                                switch response.result {
+                                case .success(_):
+                                    self.alretMessage.onNext((title: "Success!", message: "authenticated successfully"))
+                                case .failure(_):
+                                    self.client = nil
+                                    self.alretMessage.onNext((title: "Error", message: "error in verifying authorization"))
                                 }
                             }
                     }
@@ -80,10 +82,63 @@ class TwitterCounterViewModel {
                     session.start()
 
                 } catch {
-                    self.controller.showAlert(title: "Error", message: error.localizedDescription)
+                    self.alretMessage.onNext((title: "Error", message: error.localizedDescription))
                 }
             }
         
+    }
+    
+    func postTweet(tweet: String) {
+        if client == nil {
+            alretMessage.onNext((title: "error", message: "there's no authentication with the server"))
+            return
+        }
+        if checkInternetConnection() {
+            DispatchQueue.global(qos: .background).async { [weak self] in
+                guard let self = self else { return }
+                guard let client = self.client else {
+                    self.alretMessage.onNext((title: "error", message: "error in internet connection"))
+                    return
+                }
+
+                let getTweetsRequest = GetTweetsRequestV2(ids: ["1575687922229051393"])
+                let postTweet = PostTweetsRequestV2(text: tweet)
+                let response = client.session.send(getTweetsRequest)
+                response.responseObject { response in
+                    switch response.result {
+                    case .success(_):
+                        if let error = response.error {
+                            // this check is when the request itself is successful but it didn't do what it should, for example getting a tweet while giving a wrong tweet -> the request will be successful but it won't find a tweet with the wrong id.
+                            self.alretMessage.onNext((title: "error", message: error.localizedDescription))
+                            return
+                        }
+                        
+                        print("response: \(response.prettyString)")
+                        self.alretMessage.onNext((title: "success", message: "tweeted successfully!"))
+                    case .failure(_):
+                        self.alretMessage.onNext((title: "error", message: "failed tweeting"))
+                    }
+                }
+            }
+        } else {
+            alretMessage.onNext((title: "error", message: "error in internet connection"))
+        }
+    }
+    
+    func checkInternetConnection() -> Bool {
+        do {
+            let reachability = try Reachability()
+            switch reachability.connection {
+                case .wifi, .cellular:
+                    print("connected")
+                return true
+                default:
+                    print("no connection")
+                return false
+            }
+        } catch {
+            return false
+        }
     }
 
 }

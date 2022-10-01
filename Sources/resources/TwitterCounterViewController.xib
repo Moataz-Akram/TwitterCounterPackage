@@ -29,27 +29,27 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twitterIcon" translatesAutoresizingMaskIntoConstraints="NO" id="W8q-Nv-usv">
-                    <rect key="frame" x="162.66666666666666" y="107" width="65" height="65"/>
+                    <rect key="frame" x="159" y="63" width="72" height="72"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="65" id="P7E-rq-Tjm"/>
-                        <constraint firstAttribute="height" constant="65" id="lMW-gT-fnr"/>
+                        <constraint firstAttribute="height" constant="72" id="lMW-gT-fnr"/>
+                        <constraint firstAttribute="width" secondItem="W8q-Nv-usv" secondAttribute="height" multiplier="1:1" id="x2L-gs-1Gh"/>
                     </constraints>
                 </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="dak-hb-07E">
-                    <rect key="frame" x="16" y="188" width="358" height="80"/>
+                    <rect key="frame" x="16" y="151" width="358" height="100"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wAN-f5-OsZ">
-                            <rect key="frame" x="0.0" y="0.0" width="171" height="80"/>
+                            <rect key="frame" x="0.0" y="0.0" width="171" height="100"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Characters typed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GUd-wp-OXr">
-                                    <rect key="frame" x="0.0" y="0.0" width="171" height="20"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="171" height="30"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                     <nil key="textColor"/>
                                     <color key="highlightedColor" red="0.91427183150000002" green="0.96021503210000003" blue="0.99216192960000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="avZ-7c-Ky5">
-                                    <rect key="frame" x="0.0" y="20" width="171" height="60"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <rect key="frame" x="0.0" y="30" width="171" height="70"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -57,7 +57,7 @@
                             <constraints>
                                 <constraint firstItem="avZ-7c-Ky5" firstAttribute="top" secondItem="GUd-wp-OXr" secondAttribute="bottom" id="D0A-i9-0dD"/>
                                 <constraint firstItem="GUd-wp-OXr" firstAttribute="leading" secondItem="wAN-f5-OsZ" secondAttribute="leading" id="N3c-VJ-vrK"/>
-                                <constraint firstItem="GUd-wp-OXr" firstAttribute="height" secondItem="wAN-f5-OsZ" secondAttribute="height" multiplier="0.25" id="OXY-3t-AC5"/>
+                                <constraint firstItem="GUd-wp-OXr" firstAttribute="height" secondItem="wAN-f5-OsZ" secondAttribute="height" multiplier="0.3" id="OXY-3t-AC5"/>
                                 <constraint firstAttribute="trailing" secondItem="avZ-7c-Ky5" secondAttribute="trailing" id="SyG-YU-jhZ"/>
                                 <constraint firstAttribute="trailing" secondItem="GUd-wp-OXr" secondAttribute="trailing" id="Y0I-oR-GtQ"/>
                                 <constraint firstItem="GUd-wp-OXr" firstAttribute="top" secondItem="wAN-f5-OsZ" secondAttribute="top" id="cIM-p5-APH"/>
@@ -66,17 +66,17 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vM8-ht-ySy">
-                            <rect key="frame" x="187" y="0.0" width="171" height="80"/>
+                            <rect key="frame" x="187" y="0.0" width="171" height="100"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Characters remaining" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wKe-mD-t0j">
-                                    <rect key="frame" x="0.0" y="0.0" width="171" height="20"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="171" height="30"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E76-bX-WNl">
-                                    <rect key="frame" x="0.0" y="20" width="171" height="60"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <rect key="frame" x="0.0" y="30" width="171" height="70"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -89,37 +89,26 @@
                                 <constraint firstAttribute="trailing" secondItem="wKe-mD-t0j" secondAttribute="trailing" id="fnK-QE-fOW"/>
                                 <constraint firstItem="E76-bX-WNl" firstAttribute="leading" secondItem="vM8-ht-ySy" secondAttribute="leading" id="kej-MG-cXB"/>
                                 <constraint firstAttribute="trailing" secondItem="E76-bX-WNl" secondAttribute="trailing" id="pCG-RL-HYv"/>
-                                <constraint firstItem="wKe-mD-t0j" firstAttribute="height" secondItem="vM8-ht-ySy" secondAttribute="height" multiplier="0.25" id="qH3-K8-GgU"/>
+                                <constraint firstItem="wKe-mD-t0j" firstAttribute="height" secondItem="vM8-ht-ySy" secondAttribute="height" multiplier="0.3" id="qH3-K8-GgU"/>
                             </constraints>
                         </view>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" constant="80" id="fdr-qn-rpo"/>
+                        <constraint firstAttribute="height" constant="100" id="fdr-qn-rpo"/>
                     </constraints>
                 </stackView>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="What's happening?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="77o-hF-Jb5">
-                    <rect key="frame" x="16" y="284" width="358" height="150"/>
+                    <rect key="frame" x="16" y="275" width="358" height="250"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="150" id="ds4-Du-cGE"/>
+                        <constraint firstAttribute="height" constant="250" id="ds4-Du-cGE"/>
                     </constraints>
                     <color key="textColor" systemColor="labelColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X4m-pw-tcb">
-                    <rect key="frame" x="0.0" y="47" width="390" height="44"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="44" id="HlN-9M-uEE"/>
-                    </constraints>
-                    <items>
-                        <navigationItem title="Twitter character count" id="WeV-Ot-hce">
-                            <barButtonItem key="leftBarButtonItem" title="Item" image="chevron.left" catalog="system" id="CPe-vx-qJk"/>
-                        </navigationItem>
-                    </items>
-                </navigationBar>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="gcc-Pt-JeE">
-                    <rect key="frame" x="16" y="458" width="358" height="40"/>
+                    <rect key="frame" x="16" y="549" width="358" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iSM-Ie-T1G">
                             <rect key="frame" x="0.0" y="0.0" width="89.666666666666671" height="40"/>
@@ -127,7 +116,7 @@
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="Copy text">
-                                <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="titleFontDescription" type="boldSystem" pointSize="12"/>
                             </buttonConfiguration>
                             <connections>
                                 <action selector="copyTextDidPress:" destination="-1" eventType="touchUpInside" id="sos-M3-4Oe"/>
@@ -139,7 +128,7 @@
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="Clear text">
-                                <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="titleFontDescription" type="boldSystem" pointSize="12"/>
                             </buttonConfiguration>
                             <connections>
                                 <action selector="clearTextDidPress:" destination="-1" eventType="touchUpInside" id="Y9u-P1-Dj6"/>
@@ -159,45 +148,43 @@
                     </constraints>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dh2-5H-I5n">
-                    <rect key="frame" x="16" y="514" width="358" height="40"/>
+                    <rect key="frame" x="16" y="613" width="358" height="40"/>
                     <color key="backgroundColor" systemColor="systemCyanColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="cKV-Ls-ssI"/>
                     </constraints>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="Post tweet" cornerStyle="large"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Post tweet" cornerStyle="large">
+                        <fontDescription key="titleFontDescription" type="boldSystem" pointSize="14"/>
+                    </buttonConfiguration>
                     <connections>
                         <action selector="postTweetDidPress:" destination="-1" eventType="touchUpInside" id="vKe-tf-B5E"/>
                     </connections>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" systemColor="systemGray6Color"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="77o-hF-Jb5" secondAttribute="trailing" constant="16" id="1kx-xS-pJ6"/>
-                <constraint firstItem="77o-hF-Jb5" firstAttribute="top" secondItem="dak-hb-07E" secondAttribute="bottom" constant="16" id="6FP-B2-7qf"/>
-                <constraint firstItem="X4m-pw-tcb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="9i4-zX-am8"/>
-                <constraint firstItem="W8q-Nv-usv" firstAttribute="top" secondItem="X4m-pw-tcb" secondAttribute="bottom" constant="16" id="AQs-UN-hb8"/>
-                <constraint firstItem="X4m-pw-tcb" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Ad4-QO-pxk"/>
+                <constraint firstItem="77o-hF-Jb5" firstAttribute="top" secondItem="dak-hb-07E" secondAttribute="bottom" constant="24" id="6FP-B2-7qf"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dak-hb-07E" secondAttribute="trailing" constant="16" id="C2G-u9-u4Y"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Dh2-5H-I5n" secondAttribute="trailing" constant="16" id="HcF-y1-rW4"/>
-                <constraint firstItem="Dh2-5H-I5n" firstAttribute="top" secondItem="gcc-Pt-JeE" secondAttribute="bottom" constant="16" id="Lga-hU-WRZ"/>
+                <constraint firstItem="Dh2-5H-I5n" firstAttribute="top" secondItem="gcc-Pt-JeE" secondAttribute="bottom" constant="24" id="Lga-hU-WRZ"/>
                 <constraint firstItem="gcc-Pt-JeE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Pax-jr-lvM"/>
                 <constraint firstItem="dak-hb-07E" firstAttribute="top" secondItem="W8q-Nv-usv" secondAttribute="bottom" constant="16" id="YOQ-DO-o0f"/>
                 <constraint firstItem="Dh2-5H-I5n" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="bHT-B4-dH5"/>
                 <constraint firstItem="gcc-Pt-JeE" firstAttribute="top" secondItem="77o-hF-Jb5" secondAttribute="bottom" constant="24" id="cEs-IE-ekt"/>
                 <constraint firstItem="W8q-Nv-usv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="fcG-Se-c71"/>
                 <constraint firstItem="dak-hb-07E" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="guo-xX-w96"/>
-                <constraint firstItem="X4m-pw-tcb" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="ixb-vY-Rvf"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="gcc-Pt-JeE" secondAttribute="trailing" constant="16" id="jxq-pM-oUa"/>
                 <constraint firstItem="77o-hF-Jb5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="kHA-ZO-YxD"/>
+                <constraint firstItem="W8q-Nv-usv" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="yrt-CK-luJ"/>
             </constraints>
             <point key="canvasLocation" x="138" y="21"/>
         </view>
     </objects>
     <resources>
-        <image name="chevron.left" catalog="system" width="97" height="128"/>
         <image name="twitterIcon" width="48" height="48"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -207,9 +194,6 @@
         </systemColor>
         <systemColor name="systemCyanColor">
             <color red="0.19607843137254902" green="0.67843137254901964" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

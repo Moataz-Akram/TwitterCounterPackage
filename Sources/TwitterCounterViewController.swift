@@ -6,10 +6,10 @@
 //
 
 import UIKit
-import TwitterAPIKit
 import AuthenticationServices
+import RxSwift
 
-class TwitterCounterViewController: UIViewController {
+public class TwitterCounterViewController: UIViewController {
     @IBOutlet weak var characterCountsStack: UIStackView!
     @IBOutlet weak var countTypedTitle: UILabel!
     @IBOutlet weak var countRemainingTitle: UILabel!
@@ -20,55 +20,64 @@ class TwitterCounterViewController: UIViewController {
     @IBOutlet weak var clearTextButton: UIButton!
     @IBOutlet weak var postTweetButton: UIButton!
     
-    let viewModel = TwitterCounterViewModel()
+    let viewModel: TwitterCounterViewModel
+    private let disposeBag = DisposeBag()
     
     let placeHolderText = "Start typing! You can enter up to 280 characters"
     
-    var client: TwitterAPIClient?
-    var token: TwitterAuthenticationMethod.OAuth20?
-    
-    let consumerKey = "EOhRvxTAJkaWUE3tqWH3QvBrF"
-    let consumerSecret = "Kg7KiHts2kigiWDiBlAD4pXf0RueT54dG3O5JInlUHGoTfSwv4"
-    var oauthToken = "1211128639263141888-CcxBOEgohfw29jFixBh3WqvJ7I26Td"
-    var oauthTokenSecret = "F3l8vXL0Lo5wL28KwJkhiHKvW2RzeGwNOlJTRQgpHsf6W"
-    
-    let clientId = "MFNNRy1YOWtoQkdVTTNBOFUtY0g6MTpjaQ"
-    let clientSecert = "gu4mHHhUUjOIqqhgXO8mYmLWuReqyuFR8Z5f3os8W8sKSiWx5M"
-
     var characterCount: Int {
         (self.textField.text as NSString).length
     }
     
-    override func viewDidLoad() {
+    public init(appURL: String) {
+        viewModel = TwitterCounterViewModel(oauthCallback: appURL)
+        super.init(nibName: String(describing: "\(TwitterCounterViewController.self)"), bundle: .main)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    public override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.controller = self
-        viewModel.auth1(sessionProvider: self)
-        textField.delegate = self
+        setupViewModel()
         setupUI()
-        // Do any additional setup after loading the view.
         addKeyboardDismissHandler()
+    }
+    
+    func setupViewModel() {
+        viewModel.authenticateTwitter(sessionProvider: self)
+        
+        viewModel.alretMessage.subscribe { [weak self] event in
+            guard let self = self else { return }
+            let alertTitle = event.element?.title
+            let alertMessage = event.element?.message
+            self.showAlert(title: alertTitle, message: alertMessage)
+        }.disposed(by: disposeBag)
     }
     
     func setupUI() {
         typedCount.text = "0/280"
         remainingCount.text = "280"
+        textField.delegate = self
         textField.text = placeHolderText
         textField.textColor = .placeholderText
+        textField.addingShadow()
 
-        countTypedTitle.backgroundColor = .cyan
-        countRemainingTitle.backgroundColor = .cyan
-        countTypedTitle.roundUpperCorners(cornerRadius: 6)
-        countRemainingTitle.roundUpperCorners(cornerRadius: 6)
+        countTypedTitle.backgroundColor = .systemTeal
+        countRemainingTitle.backgroundColor = .systemTeal
+        countTypedTitle.roundUpperCorners(cornerRadius: 10)
+        countRemainingTitle.roundUpperCorners(cornerRadius: 10)
 
-        copyTextButton.layer.cornerRadius = 6
-        clearTextButton.layer.cornerRadius = 6
-        postTweetButton.layer.cornerRadius = 6
-        textField.layer.cornerRadius = 6
+        copyTextButton.layer.cornerRadius = 10
+        clearTextButton.layer.cornerRadius = 10
+        postTweetButton.layer.cornerRadius = 10
+        textField.layer.cornerRadius = 10
 
         characterCountsStack.subviews.forEach{ view in
-            view.layer.cornerRadius = 6
+            view.layer.cornerRadius = 10
             view.layer.borderWidth = 1
-            view.layer.borderColor = UIColor.cyan.cgColor
+            view.layer.borderColor = UIColor.systemTeal.cgColor
         }
         
     }
@@ -80,28 +89,31 @@ class TwitterCounterViewController: UIViewController {
     @IBAction func clearTextDidPress(_ sender: Any) {
         textField.text = ""
         textViewDidEndEditing(textField)
+        typedCount.text = "0/280"
+        remainingCount.text = "280"
     }
     
     @IBAction func postTweetDidPress(_ sender: Any) {
-        postTweet()
+        viewModel.postTweet(tweet: textField.text)
     }
+    
 }
 
 extension TwitterCounterViewController: UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
+    public func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == placeHolderText {
             textView.text = ""
         }
     }
     
-    func textViewDidEndEditing(_ textView: UITextView) {
+    public func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text == "" {
             textView.text = placeHolderText
             textField.textColor = .placeholderText
         }
     }
     
-    func textViewDidChange(_ textView: UITextView) {
+    public func textViewDidChange(_ textView: UITextView) {
         if textField == textView {
             if textField.text == placeHolderText {
                 typedCount.text = "0/280"
@@ -116,72 +128,3 @@ extension TwitterCounterViewController: UITextViewDelegate {
         } else { return }
     }
 }
-
-extension UIViewController {
-    /// Adds *UITapGestureRecognizer* to current UIViewController's view to dismiss presented keyboard.
-    public func addKeyboardDismissHandler() {
-        let tap: UITapGestureRecognizer =
-            UITapGestureRecognizer(
-                target: self,
-                action: #selector(UIViewController.dismissKeyboard)
-        )
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-
-    /// Dismisses keyboard presented on the current UIViewController.
-    @objc public func dismissKeyboard() {
-        view.endEditing(true)
-    }
-}
-
-
-
-
-
-//extension TwitterCounterViewController {
-//
-//    func setupTwitterSession() {
-//        client = TwitterAPIClient(.oauth20(.init(
-//                    clientID: clientId,
-//                    scope: ["tweet.read", "tweet.write", "users.read", "offline.access"],
-//                    tokenType: "bearer",
-//                    expiresIn: 7200,
-//                    accessToken: oauthTokenSecret,
-//                    refreshToken: ""
-//                )))
-//        client?.refreshOAuth20Token(type: .publicClient, forceRefresh: true) { [weak self] result in
-//            print("result: \(result)")
-//            do {
-//                let refresh = try result.get()
-//                if refresh.refreshed {
-//                    self?.storeToken(refresh.token)
-//                }
-//            } catch {
-//
-//            }
-//        }
-//
-//        NotificationCenter.default.addObserver(
-//            self,
-//            selector: #selector(didRefreshOAuth20Token(_:)),
-//            name: TwitterAPIClient.didRefreshOAuth20Token,
-//            object: nil
-//        )
-//
-//    }
-//
-//    func storeToken(_ token2: TwitterAuthenticationMethod.OAuth20) {
-//        token = token2
-//    }
-//
-//    @objc func didRefreshOAuth20Token(_ notification: Notification) {
-//        guard let token = notification.userInfo?[TwitterAPIClient.tokenUserInfoKey] as? TwitterAuthenticationMethod.OAuth20 else {
-//            fatalError()
-//        }
-//        print("didRefreshOAuth20Token", didRefreshOAuth20Token, token)
-//        storeToken(token)
-//    }
-//
-//}
-
