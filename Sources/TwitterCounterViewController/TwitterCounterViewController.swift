@@ -93,6 +93,7 @@ public class TwitterCounterViewController: UIViewController {
         textViewDidEndEditing(textField)
         typedCount.text = "0/280"
         remainingCount.text = "280"
+        postTweetButton.isEnabled = true
     }
     
     @IBAction func postTweetDidPress(_ sender: Any) {
@@ -127,6 +128,11 @@ extension TwitterCounterViewController: UITextViewDelegate {
             textField.layer.opacity = 1
             typedCount.text = "\(characterCount)/280"
             remainingCount.text = "\(280 - characterCount)"
+            if characterCount < 280 {
+                postTweetButton.isEnabled = false
+            } else {
+                postTweetButton.isEnabled = true
+            }
         } else { return }
     }
 }
