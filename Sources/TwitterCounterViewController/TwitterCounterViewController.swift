@@ -128,7 +128,7 @@ extension TwitterCounterViewController: UITextViewDelegate {
             textField.layer.opacity = 1
             typedCount.text = "\(characterCount)/280"
             remainingCount.text = "\(280 - characterCount)"
-            if characterCount < 280 {
+            if characterCount > 280 {
                 postTweetButton.isEnabled = false
             } else {
                 postTweetButton.isEnabled = true
