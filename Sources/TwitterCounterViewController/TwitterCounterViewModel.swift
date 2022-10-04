@@ -103,7 +103,7 @@ class TwitterCounterViewModel {
 
                 let getTweetsRequest = GetTweetsRequestV2(ids: ["1575687922229051393"])
                 let postTweet = PostTweetsRequestV2(text: tweet)
-                let response = client.session.send(getTweetsRequest)
+                let response = client.session.send(postTweet)
                 response.responseObject { response in
                     switch response.result {
                     case .success(_):
