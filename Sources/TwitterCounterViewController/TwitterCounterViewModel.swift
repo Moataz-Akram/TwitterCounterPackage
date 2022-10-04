@@ -66,6 +66,13 @@ class TwitterCounterViewModel {
                             .responseObject { response in
                                 switch response.result {
                                 case .success(_):
+                                    let token = try? response.result.get()
+                                    self.client = TwitterAPIClient(
+                                        consumerKey: self.consumerKey,
+                                        consumerSecret: self.consumerSecret,
+                                        oauthToken: token?.oauthToken ?? "",
+                                        oauthTokenSecret: token?.oauthTokenSecret ?? ""
+                                    )
                                     self.alretMessage.onNext((title: "Success!", message: "authenticated successfully"))
                                 case .failure(_):
                                     self.client = nil
