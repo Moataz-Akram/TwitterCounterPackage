@@ -31,7 +31,7 @@ public class TwitterCounterViewController: UIViewController {
     
     public init(appURL: String) {
         viewModel = TwitterCounterViewModel(oauthCallback: appURL)
-        super.init(nibName: String(describing: "\(TwitterCounterViewController.self)"), bundle: Bundle.module)
+        super.init(nibName: String(describing: "\(TwitterCounterViewController.self)"), bundle: Bundle(for: TwitterCounterViewController.self))
     }
     
     required init?(coder: NSCoder) {
