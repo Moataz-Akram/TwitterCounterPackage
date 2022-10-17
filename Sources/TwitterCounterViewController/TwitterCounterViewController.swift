@@ -26,7 +26,7 @@ public class TwitterCounterViewController: UIViewController {
     let placeHolderText = "Start typing! You can enter up to 280 characters"
     
     var characterCount: Int {
-        (self.textField.text as NSString).length
+        viewModel.calculateTweetLength(text: textField.text)
     }
     
     public init(appURL: String) {
@@ -117,6 +117,7 @@ extension TwitterCounterViewController: UITextViewDelegate {
     }
     
     public func textViewDidChange(_ textView: UITextView) {
+        let count = characterCount
         if textField == textView {
             if textField.text == placeHolderText {
                 typedCount.text = "0/280"
@@ -126,8 +127,8 @@ extension TwitterCounterViewController: UITextViewDelegate {
             }
             textField.textColor = .label
             textField.layer.opacity = 1
-            typedCount.text = "\(characterCount)/280"
-            remainingCount.text = "\(280 - characterCount)"
+            typedCount.text = "\(count)/280"
+            remainingCount.text = "\(280 - count)"
             if characterCount > 280 {
                 postTweetButton.isEnabled = false
             } else {

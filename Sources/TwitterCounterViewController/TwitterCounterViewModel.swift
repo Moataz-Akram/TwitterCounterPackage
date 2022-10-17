@@ -135,4 +135,7 @@ class TwitterCounterViewModel {
         }
     }
 
+    func calculateTweetLength(text: String) -> Int {
+        TweetValidator.shared.calculateTweetLength(text: text)
+    }
 }
