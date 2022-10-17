@@ -25,7 +25,6 @@ class TweetValidator {
             (tweetText, addedCount) = calculateRegexWeight(text: tweetText, regexPattern: regex)
             count += addedCount
         }
-        print("remaining text: \(tweetText)/nremaining count: \(tweetText.count)")
         count = count + tweetText.count
         return count
     }
