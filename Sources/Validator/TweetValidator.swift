@@ -49,7 +49,8 @@ class TweetValidator {
             regexRanges.append(match.range)
         }
         // check if the first url starts at the beginning of the tweet the calculate it as 23
-        if regexPattern == Regex.URLPatternString && !regexRanges.isEmpty && regexRanges[0].location == 0 {
+        if regexPattern == Regex.URLPatternString && !regexRanges.isEmpty && regexRanges[0].location == 0
+            && currentText.first != " " {
             count -= 1
         }
         
